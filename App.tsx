@@ -8,7 +8,6 @@ import Tutorials from './components/Tutorials';
 import Sponsors from './components/Sponsors';
 import CTA from './components/CTA';
 import Footer from './components/Footer';
-import Chatbot from './components/Chatbot';
 
 const App: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -168,7 +167,6 @@ const App: React.FC = () => {
           <CTA />
         </main>
         <Footer />
-        <Chatbot />
       </div>
     </div>
   );

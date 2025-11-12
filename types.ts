@@ -30,11 +30,6 @@ export interface Tutorial {
   links: { name: string; url: string; }[];
 }
 
-export interface ChatMessage {
-  role: 'user' | 'model';
-  content: string;
-}
-
 export interface JudgingCriterion {
   title: string;
   description: string;
