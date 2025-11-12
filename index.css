@@ -149,6 +149,15 @@ section[id] {
 .hero-title-shimmer {
     background-size: 200% auto;
     animation: text-shine 6s ease-in-out infinite alternate;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.hero-title-shimmer {
+    background-size: 200% auto;
+    animation: text-shine 6s ease-in-out infinite alternate;
 }
 
 /* New Judge Card Animation: Fade & Slide Reveal */

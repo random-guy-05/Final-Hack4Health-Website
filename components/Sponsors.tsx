@@ -46,7 +46,7 @@ const Sponsors: React.FC = () => {
                 return (
                     <Animated key={tier} staggerIndex={tierIndex}>
                         <div>
-                            <h3 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-teal-400 mb-8 hero-title-shimmer">{tier} Tier</h3>
+                            <h3 className="text-4xl font-bold text-center bg-gradient-to-r from-blue-300 to-teal-400 mb-8 hero-title-shimmer">{tier} Tier</h3>
                             <div className={`grid ${gridClasses[tier]} gap-8`}>
                                 {tierSponsors.map((sponsor, index) => (
                                 <Animated key={index}>
