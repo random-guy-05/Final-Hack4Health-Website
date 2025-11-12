@@ -1,0 +1,405 @@
+:root {
+  --color-bg: #0A0F1F; /* Deep Navy */
+  --color-primary: #00A9FF; /* Electric Blue */
+  --color-secondary: #3AF2A1; /* Bright Teal */
+  --color-primary-rgb: 0, 169, 255;
+  --color-secondary-rgb: 58, 242, 161;
+  --color-accent: #00A9FF;
+  --color-text: #F0F4F8;
+  --color-text-secondary: #A8B2C0; /* Slate */
+  --color-surface: rgba(23, 29, 49, 0.6); /* Slightly transparent navy */
+  --color-border: rgba(56, 95, 171, 0.2);
+
+  --gradient-title: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  --gradient-border: linear-gradient(145deg, var(--color-primary), var(--color-secondary));
+  /* New Gradient Variants */
+  --gradient-variant-warm: linear-gradient(145deg, #FF8C00, #FF007F); /* Solar Flare: Orange to Magenta */
+  --gradient-variant-cool: linear-gradient(145deg, #2F80ED, #8A2BE2); /* Cosmic Indigo: Blue to Purple */
+}
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.font-sans {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.font-serif {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+section[id] {
+  scroll-margin-top: 100px; /* Offset for sticky header */
+}
+
+@keyframes hero-glow-breath {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.1); opacity: 0.25; }
+}
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -60%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse 40% 40% at 50% 0%, rgba(var(--color-primary-rgb), 0.2), transparent);
+  z-index: 0;
+  will-change: transform, opacity;
+  animation: hero-glow-breath 8s ease-in-out infinite;
+}
+
+/* Advanced, smooth animations */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  will-change: opacity, transform;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* New Glow UI System */
+.glow-btn, .glow-card {
+  position: relative;
+  border-radius: 0.5rem; /* 8px */
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: var(--color-text);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.glow-btn::before, .glow-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -1;
+  margin: -1px; /* same as border width */
+  border-radius: inherit;
+  background: var(--gradient-border);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  will-change: opacity;
+}
+
+.glow-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(var(--color-primary-rgb), 0.4);
+  box-shadow: 0 10px 30px rgba(var(--color-primary-rgb), 0.1);
+}
+/* Make interactive card gradients persistently subtle and intense on hover */
+.glow-card.is-interactive::before {
+  opacity: 0.2;
+}
+.glow-card.is-interactive:hover::before {
+  opacity: 1;
+}
+/* Gradient variant modifier classes */
+.glow-card.glow-card--variant-warm::before {
+  background: var(--gradient-variant-warm);
+}
+.glow-card.glow-card--variant-cool::before {
+  background: var(--gradient-variant-cool);
+}
+
+.glow-btn {
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  transition: all 0.3s ease;
+}
+.glow-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(var(--color-primary-rgb), 0.5);
+}
+
+/* AI for Alzheimer's card special styling */
+.ai-hackathon-card {
+  background: #000 !important;
+  background-image: none !important;
+  border: 1px solid rgba(var(--color-primary-rgb), 0.3) !important;
+}
+.ai-hackathon-title {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary), var(--color-primary));
+  background-size: 200% auto;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-shine 4s linear infinite;
+  text-shadow: 0 0 15px rgba(var(--color-primary-rgb), 0.5), 0 0 25px rgba(var(--color-secondary-rgb), 0.4);
+}
+@keyframes text-shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* New class for animating Tailwind-based gradient text */
+.hero-title-shimmer {
+    background-size: 200% auto;
+    animation: text-shine 6s ease-in-out infinite alternate;
+}
+
+/* New Judge Card Animation: Fade & Slide Reveal */
+.judge-card-container {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  border-radius: 0.5rem; /* Match glow-card */
+}
+.judge-card-front,
+.judge-card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  will-change: opacity, transform;
+}
+.judge-card-front {
+  opacity: 1;
+  transform: translateY(0);
+}
+.judge-card-back {
+  opacity: 0;
+  transform: translateY(20px);
+}
+.judge-card-container:hover .judge-card-front {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+.judge-card-container:hover .judge-card-back {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* New CTA "Innovation Hub" Styling */
+.cta-hub-section {
+  position: relative;
+  overflow: hidden;
+  background-color: #060913; /* Even darker bg for focus */
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+.cta-hub-glow-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  z-index: 0;
+}
+.cta-hub-glow-container::before,
+.cta-hub-glow-container::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+.cta-hub-glow-container::before {
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.15) 0%, transparent 70%);
+  animation: cta-pulse-1 8s infinite ease-in-out;
+}
+.cta-hub-glow-container::after {
+  width: 900px;
+  height: 900px;
+  background: radial-gradient(circle, rgba(var(--color-secondary-rgb), 0.1) 0%, transparent 70%);
+  animation: cta-pulse-2 10s infinite ease-in-out;
+  animation-delay: -2s;
+}
+@keyframes cta-pulse-1 {
+  0%, 100% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.8; }
+  50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+@keyframes cta-pulse-2 {
+  0%, 100% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.7; }
+  50% { transform: translate(-50%, -50%) scale(0.95); opacity: 1; }
+}
+.cta-btn {
+  background: var(--gradient-border);
+  border: none;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  box-shadow: 0 0 25px rgba(var(--color-primary-rgb), 0.3), 0 0 40px rgba(var(--color-secondary-rgb), 0.2);
+  transition: all 0.3s ease;
+  transform: scale(1.0);
+}
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 35px rgba(var(--color-primary-rgb), 0.6), 0 0 60px rgba(var(--color-secondary-rgb), 0.4);
+}
+
+@keyframes header-cta-pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 25px rgba(var(--color-primary-rgb), 0.5);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px rgba(var(--color-primary-rgb), 0.7);
+  }
+}
+.header-cta-btn {
+  animation: header-cta-pulse 3s ease-in-out infinite;
+}
+.header-cta-btn:hover {
+  animation-play-state: paused;
+  transform: scale(1.1) !important;
+}
+
+@keyframes action-btn-glow {
+  0%, 100% {
+      box-shadow: 0 0 25px rgba(var(--color-primary-rgb), 0.4), 0 0 40px rgba(var(--color-secondary-rgb), 0.2);
+  }
+  50% {
+      box-shadow: 0 0 35px rgba(var(--color-primary-rgb), 0.6), 0 0 60px rgba(var(--color-secondary-rgb), 0.4);
+  }
+}
+.action-btn {
+  background: var(--gradient-border);
+  border: none;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 0 10px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+  transform: scale(1.0);
+  animation: action-btn-glow 4s ease-in-out infinite;
+}
+.action-btn:hover {
+  transform: scale(1.05);
+  animation-play-state: paused;
+  box-shadow: 0 0 35px rgba(var(--color-primary-rgb), 0.7), 0 0 60px rgba(var(--color-secondary-rgb), 0.5);
+}
+
+.gradient-divider {
+  height: 1px;
+  border: 0;
+  background-image: linear-gradient(to right, transparent, rgba(var(--color-primary-rgb), 0.3), transparent);
+}
+
+.text-glow { /* General text glow */
+  text-shadow: 0 0 20px rgba(var(--color-primary-rgb), 0.7);
+}
+
+.section-title {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent; /* Fallback */
+  background-image: var(--gradient-title); /* Default Gradient */
+  padding-bottom: 0.1em;
+  /* Add a subtle shine animation for consistency */
+  background-size: 200% auto;
+  animation: text-shine 6s ease-in-out infinite alternate;
+}
+
+/* Section Title Gradient Modifiers */
+.section-title--warm {
+  background-image: var(--gradient-variant-warm);
+}
+.section-title--cool {
+  background-image: var(--gradient-variant-cool);
+}
+
+@keyframes prize-glow {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba(var(--color-secondary-rgb), 0.8), 
+      0 0 20px rgba(var(--color-secondary-rgb), 0.6), 
+      0 0 40px rgba(var(--color-secondary-rgb), 0.4),
+      0 0 80px rgba(var(--color-primary-rgb), 0.3);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px rgba(var(--color-secondary-rgb), 1), 
+      0 0 40px rgba(var(--color-secondary-rgb), 0.8), 
+      0 0 80px rgba(var(--color-secondary-rgb), 0.6),
+      0 0 120px rgba(var(--color-primary-rgb), 0.4);
+  }
+}
+.total-prize-value {
+  font-weight: 800; /* Extra bold */
+  background-image: linear-gradient(90deg, #fff, var(--color-secondary));
+  animation: prize-glow 4s ease-in-out infinite;
+}
+
+.prize-value-highlight {
+  color: var(--color-secondary);
+  font-weight: 700; /* Bolder */
+  text-shadow: 
+      0 0 8px rgba(var(--color-secondary-rgb), 0.8), 
+      0 0 16px rgba(var(--color-secondary-rgb), 0.5);
+}
+
+/* Fix for browser autofill styles */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text) !important;
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-bg) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* -- Typing Animation -- */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.typing-cursor {
+  font-weight: 600;
+  margin-left: 0.1em;
+  color: var(--color-primary);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes pop-in {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.typing-done {
+  animation: pop-in 0.5s ease-out;
+}
+
+/* NEW HERO TITLE STREAKS */
+@keyframes hero-streaks-animation {
+  to { background-position: 200% center; }
+}
+.hero-title-streaks {
+  background: linear-gradient(90deg, var(--color-secondary), var(--color-primary), #67E8F9, var(--color-secondary));
+  background-size: 200% auto;
+  animation: hero-streaks-animation 4s linear infinite;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
